@@ -63,12 +63,10 @@ class StartJourneyView(BaseView):
         arcade.draw_text("Start Journey", self.center_x, self.center_y,
                          arcade.color.BLACK, font_size=30, anchor_x="center")
 
-        travelers = [traveler.name for traveler in self.state['wagon_party']]
+        travelers = [traveler.name for traveler in self.props['travelers']]
 
         arcade.draw_text(f"{', '.join(travelers)}", self.center_x, self.center_y - 100,
                          arcade.color.BLACK, font_size=24, anchor_x="center")
 
-        arcade.draw_text(f"starting funds : {self.state['starting_funds']}", self.center_x, self.center_y - 200,
-                         arcade.color.BLACK, font_size=24, anchor_x="center")
-
+        
         super().on_draw()
