@@ -10,25 +10,31 @@ class SceneManager:
         self.state = {}
 
     def start(self):
-        self.show_next_view(IntroView, self.intro_done)
+        self.show_next_view(IntroView, {'done_handler':self.intro_done})
         arcade.run()
 
-    def show_next_view(self, ViewClass, done_func=None, props=None):
-        view = ViewClass(self.window.width, self.window.height, done_func)
-        view.props = props
-
+    def show_next_view(self, ViewClass, props):
+        view = ViewClass(self.window.width, self.window.height, props)
         self.window.show_view(view)
 
     def intro_done(self):
-        self.show_next_view(ChoosePartyView, self.choose_party_done)
+        props = {
+            'done_handler' : self.choose_party_done
+        }
+
+        self.show_next_view(ChoosePartyView, props)
 
     def choose_party_done(self, wagon_party, starting_funds):
         self.state['wagon_party'] = wagon_party
         self.state['starting_funds'] = starting_funds
-        self.show_next_view(StartJourneyView, self.start_journey_done, {
-                            'travelers': wagon_party})
+        props = {
+            'done_handler' : self.start_journey_done,
+            'travelers' : wagon_party
+        }
+        self.show_next_view(StartJourneyView, props)
 
     def start_journey_done(self):
+        print('Start Journey done')
         pass
 
 

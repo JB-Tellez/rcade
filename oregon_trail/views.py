@@ -1,18 +1,18 @@
 import arcade
-from gui import ActionButton
+from ui import ActionButton
 from lib import Character
 
 
 class BaseView(arcade.View):
 
-    def __init__(self, width, height, done_func=None):
+    def __init__(self, width, height, props):
         super().__init__()
         self.center_x = width / 2
         self.center_y = height / 2
-        self.done_func = done_func
+        self.props = props or {}
 
     def button_handler(self, button):
-        self.done_func()
+        self.props['done_handler']()
 
 
 class IntroView(BaseView):
@@ -48,7 +48,7 @@ class ChoosePartyView(BaseView):
         wagon_party = [Character('Eliza'), Character(
             'Jed'), Character('Silas'), Character('Beulah')]
         starting_funds = 5000
-        self.done_func(wagon_party, starting_funds)
+        self.props['done_handler'](wagon_party, starting_funds)
 
 
 class StartJourneyView(BaseView):
