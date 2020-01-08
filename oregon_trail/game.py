@@ -2,8 +2,7 @@ import arcade
 
 from views import IntroView, ChoosePartyView, StartJourneyView
 
-
-class SceneManager:
+class Game:
 
     def __init__(self):
         self.window = arcade.Window(800, 600, "Oregon Trail")
@@ -39,5 +38,5 @@ class SceneManager:
 
 
 if __name__ == "__main__":
-    sm = SceneManager()
-    sm.start()
+    game = Game()
+    game.start()
