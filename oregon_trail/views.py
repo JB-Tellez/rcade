@@ -17,6 +17,10 @@ class BaseView(arcade.View):
 
 class IntroView(BaseView):
 
+    def __init__(self, *args, **kwargs):
+        self.input_text = ''
+        super().__init__(*args, **kwargs)
+
     def on_show(self):
         arcade.set_background_color(arcade.color.WHITE)
         next_button = ActionButton(
@@ -27,7 +31,23 @@ class IntroView(BaseView):
         arcade.start_render()
         arcade.draw_text("Oregon Trail", self.center_x, self.center_y,
                          arcade.color.BLACK, font_size=30, anchor_x="center")
+        
+        arcade.draw_text('Enter Text: ', self.center_x - 100, self.center_y - 100, arcade.color.RADICAL_RED)
+
+        if self.input_text:
+            arcade.draw_text(self.input_text, self.center_x, self.center_y - 100, arcade.color.RADICAL_RED)
+
         super().on_draw()
+
+    def on_key_press(self, key, modifiers):
+        if key == arcade.key.BACKSPACE:
+            self.input_text = self.input_text[:-1]
+        elif key == arcade.key.ENTER:
+            return self.input_text
+        else:
+            self.input_text += chr(key)
+
+        return None
 
 
 class ChoosePartyView(BaseView):
