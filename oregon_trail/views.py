@@ -45,7 +45,7 @@ class ChoosePartyView(BaseView):
         super().on_draw()
 
     def button_handler(self, button):
-        wagon_party = [Character('Eliza'), Character('Jed')]
+        wagon_party = [Character('Eliza'), Character('Jed'), Character('Silas'), Character('Beulah')]
         starting_funds = 5000
         self.done_func(wagon_party, starting_funds)
 
