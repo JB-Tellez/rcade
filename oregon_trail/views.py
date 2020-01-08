@@ -52,11 +52,23 @@ class IntroView(BaseView):
 
 class ChoosePartyView(BaseView):
 
+    def __init__(self, width, height, props):
+        super().__init__(width, height, props)
+        self.wagon_party = []
+
     def on_show(self):
         arcade.set_background_color(arcade.color.WHITE)
-        next_button = ActionButton(
-            self.center_x, self.center_y + 100, 'Next', self.button_handler)
-        self.button_list.append(next_button)
+
+        eliza_button = ActionButton(self.center_x, self.center_y - 50,'Eliza',self.button_handler)
+        self.button_list.append(eliza_button)
+        jebediah_button = ActionButton(self.center_x, self.center_y - 100,'Jebediah',self.button_handler)
+        self.button_list.append(jebediah_button)
+        beulah_button = ActionButton(self.center_x, self.center_y - 150,'Beulah',self.button_handler)
+        self.button_list.append(beulah_button)
+        silas_button = ActionButton(self.center_x, self.center_y - 200,'Silas',self.button_handler)
+        self.button_list.append(silas_button)
+        ok_button = ActionButton(self.center_x, self.center_y - 250,'ok',self.button_handler)
+        self.button_list.append(ok_button)
 
     def on_draw(self):
         arcade.start_render()
@@ -65,10 +77,12 @@ class ChoosePartyView(BaseView):
         super().on_draw()
 
     def button_handler(self, button):
-        wagon_party = [Character('Eliza'), Character(
-            'Jed'), Character('Silas'), Character('Beulah')]
-        starting_funds = 5000
-        self.props['done_handler'](wagon_party, starting_funds)
+
+        if button.name == 'ok':
+            starting_funds = 5000
+            self.props['done_handler'](self.wagon_party, starting_funds)
+        else:
+            self.wagon_party.append(Character(button.name))
 
 
 class StartJourneyView(BaseView):
