@@ -45,7 +45,8 @@ class ChoosePartyView(BaseView):
         super().on_draw()
 
     def button_handler(self, button):
-        wagon_party = [Character('Eliza'), Character('Jed'), Character('Silas'), Character('Beulah')]
+        wagon_party = [Character('Eliza'), Character(
+            'Jed'), Character('Silas'), Character('Beulah')]
         starting_funds = 5000
         self.done_func(wagon_party, starting_funds)
 
@@ -54,9 +55,6 @@ class StartJourneyView(BaseView):
 
     def on_show(self):
         arcade.set_background_color(arcade.color.WHITE)
-        next_button = ActionButton(
-            self.center_x, self.center_y + 100, 'Next', self.button_handler)
-        self.button_list.append(next_button)
 
     def on_draw(self):
         arcade.start_render()
@@ -68,5 +66,4 @@ class StartJourneyView(BaseView):
         arcade.draw_text(f"{', '.join(travelers)}", self.center_x, self.center_y - 100,
                          arcade.color.BLACK, font_size=24, anchor_x="center")
 
-        
         super().on_draw()

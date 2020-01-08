@@ -1,6 +1,4 @@
 import arcade
-import os
-import sys
 
 from views import IntroView, ChoosePartyView, StartJourneyView
 
@@ -27,14 +25,11 @@ class SceneManager:
     def choose_party_done(self, wagon_party, starting_funds):
         self.state['wagon_party'] = wagon_party
         self.state['starting_funds'] = starting_funds
-        self.show_next_view(StartJourneyView,self.start_journey_done, {'travelers':wagon_party})
-      
+        self.show_next_view(StartJourneyView, self.start_journey_done, {
+                            'travelers': wagon_party})
+
     def start_journey_done(self):
         pass
-
-    
-
-
 
 
 if __name__ == "__main__":
